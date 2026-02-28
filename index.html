@@ -7,33 +7,126 @@
   <meta name="description" content="Software Engineer 3 at NetApp | C/C++ Systems | Filesystems | Storage" />
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    // Apply theme immediately to prevent flash of wrong theme
+    (function(){
+      var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
+      document.documentElement.setAttribute('data-theme',t);
+    })();
+  </script>
 
   <style>
     /* ═══════════════════════════════════════
        COLOR PALETTE & DESIGN TOKENS
     ═══════════════════════════════════════ */
     :root {
-      --bg-primary: #030712;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    :root[data-theme="dark"] {
+      --bg-primary: #020617;
       --bg-secondary: #0f172a;
-      --bg-card: rgba(15, 23, 42, 0.6);
-      --bg-card-hover: rgba(15, 23, 42, 0.85);
-      --border: rgba(56, 189, 248, 0.08);
-      --border-hover: rgba(56, 189, 248, 0.25);
+      --bg-card: #1e293b;
+      --bg-card-hover: rgba(30, 41, 59, 0.95);
+      --border: #334155;
+      --border-hover: rgba(56, 189, 248, 0.35);
       --text-primary: #f1f5f9;
       --text-secondary: #94a3b8;
       --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
       --accent-2: #818cf8;
       --accent-3: #a78bfa;
       --accent-gradient: linear-gradient(135deg, #38bdf8, #818cf8, #a78bfa);
       --accent-gradient-2: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
       --glow-accent: rgba(56, 189, 248, 0.15);
       --glow-purple: rgba(129, 140, 248, 0.12);
-      --card-shadow: 0 4px 24px rgba(0,0,0,0.25), 0 0 0 1px var(--border);
-      --card-shadow-hover: 0 8px 40px rgba(56,189,248,0.08), 0 0 0 1px var(--border-hover);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
     }
+
+    /* ═══════════════════════════════════════
+       LIGHT THEME
+    ═══════════════════════════════════════ */
+    :root[data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: rgba(255, 255, 255, 0.95);
+      --border: #e2e8f0;
+      --border-hover: rgba(37, 99, 235, 0.3);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-2: #6366f1;
+      --accent-3: #7c3aed;
+      --accent-gradient: linear-gradient(135deg, #2563eb, #6366f1, #7c3aed);
+      --accent-gradient-2: linear-gradient(135deg, #2563eb 0%, #6366f1 50%, #7c3aed 100%);
+      --glow-accent: rgba(37, 99, 235, 0.12);
+      --glow-purple: rgba(99, 102, 241, 0.1);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    :root[data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(37, 99, 235, 0.04), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(99, 102, 241, 0.04), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(124, 58, 237, 0.02), transparent 40%);
+    }
+
+    :root[data-theme="light"] .hamburger { background:rgba(255,255,255,0.85);border-color:var(--border) }
+    :root[data-theme="light"] .hamburger:hover { background:rgba(255,255,255,0.95) }
+    :root[data-theme="light"] .hamburger span { background:#0f172a }
+    :root[data-theme="light"] .sidebar { background:rgba(255,255,255,0.97) }
+    :root[data-theme="light"] .top-link { background:rgba(37,99,235,0.06);border-color:rgba(37,99,235,0.12) }
+    :root[data-theme="light"] .top-link:hover { background:rgba(37,99,235,0.1);border-color:rgba(37,99,235,0.25) }
+    :root[data-theme="light"] .stat-item { background:rgba(37,99,235,0.04);border-color:var(--border) }
+    :root[data-theme="light"] .contact-item { background:rgba(37,99,235,0.03) }
+    :root[data-theme="light"] .skill-card { background:#ffffff;border-color:var(--border) }
+    :root[data-theme="light"] .project-card { background:#ffffff;border-color:var(--border) }
+    :root[data-theme="light"] .cert-card { background:#ffffff;border-color:var(--border) }
+    :root[data-theme="light"] .cert-badge { background:rgba(0,0,0,0.03);border-color:var(--border) }
+    :root[data-theme="light"] .media-card { background:#ffffff;border-color:var(--border) }
+    :root[data-theme="light"] .media-embed { background:#e2e8f0 }
+    :root[data-theme="light"] .tag { background:rgba(37,99,235,0.08);color:var(--accent);border-color:rgba(37,99,235,0.12) }
+    :root[data-theme="light"] .tag-purple { background:rgba(99,102,241,0.08);color:var(--accent-2);border-color:rgba(99,102,241,0.12) }
+    :root[data-theme="light"] .cert-link { background:rgba(37,99,235,0.06);border-color:rgba(37,99,235,0.1) }
+    :root[data-theme="light"] .por-list li { background:rgba(37,99,235,0.02) }
+    :root[data-theme="light"] .por-icon { background:rgba(37,99,235,0.08) }
+    :root[data-theme="light"] .footer-social a { background:rgba(37,99,235,0.06);border-color:var(--border) }
+    :root[data-theme="light"] .scroll-progress { box-shadow:0 0 10px rgba(37,99,235,0.4) }
+    :root[data-theme="light"] .back-to-top { box-shadow:0 4px 20px rgba(37,99,235,0.2) }
+    :root[data-theme="light"] .avatar-wrap::before { opacity:0.4 }
+    :root[data-theme="light"] .overlay { background:rgba(0,0,0,0.2) }
+    :root[data-theme="light"] ::selection { background:rgba(37,99,235,0.2);color:#0f172a }
+    :root[data-theme="light"] .card { background:var(--bg-card);border-color:var(--border) }
+    :root[data-theme="light"] .card::before { background:linear-gradient(90deg,transparent,rgba(37,99,235,0.12),transparent) }
+
+    /* ═══════════════════════════════════════
+       THEME TOGGLE BUTTON
+    ═══════════════════════════════════════ */
+    .theme-toggle {
+      position:fixed;top:20px;right:20px;width:40px;height:40px;cursor:pointer;
+      z-index:1201;display:flex;align-items:center;justify-content:center;
+      background:rgba(15,23,42,0.8);backdrop-filter:blur(12px);
+      border:1px solid var(--border);border-radius:10px;
+      transition:all var(--transition);color:var(--text-primary);font-size:1.2rem;
+      padding:0;outline:none;
+    }
+    .theme-toggle:hover { border-color:var(--border-hover);background:rgba(15,23,42,0.95);transform:scale(1.05) }
+    .theme-toggle:focus-visible { outline:2px solid var(--accent);outline-offset:2px }
+    :root[data-theme="light"] .theme-toggle { background:rgba(255,255,255,0.85);border-color:var(--border) }
+    :root[data-theme="light"] .theme-toggle:hover { background:rgba(255,255,255,0.95) }
+
+    .theme-toggle .icon-sun,
+    .theme-toggle .icon-moon { transition:transform 0.4s ease,opacity 0.3s ease;position:absolute }
+    .theme-toggle .icon-sun { opacity:0;transform:rotate(-90deg) scale(0.5) }
+    .theme-toggle .icon-moon { opacity:1;transform:rotate(0) scale(1) }
+    :root[data-theme="light"] .theme-toggle .icon-sun { opacity:1;transform:rotate(0) scale(1) }
+    :root[data-theme="light"] .theme-toggle .icon-moon { opacity:0;transform:rotate(90deg) scale(0.5) }
 
     /* ═══════════════════════════════════════
        RESET & BASE
@@ -48,6 +141,7 @@
       line-height: 1.7;
       min-height: 100vh;
       overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     a { color: var(--accent); text-decoration: none; transition: color var(--transition) }
@@ -678,6 +772,12 @@
   <span></span><span></span><span></span>
 </button>
 
+<!-- THEME TOGGLE -->
+<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+  <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+  <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
 <!-- SIDE NAV -->
 <nav id="sidebar" class="sidebar" aria-hidden="true">
   <a href="#home" data-target="home">🏠 Home</a>
@@ -1129,6 +1229,38 @@
       player.innerHTML='<iframe src="https://www.youtube.com/embed/yIxsn_poz00?autoplay=1&rel=0&modestbranding=1" title="Podcast Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>';
     });
   }
+
+  /* ═══ Dark / Light Theme Toggle ═══ */
+  const themeToggle=document.getElementById('themeToggle');
+  const html=document.documentElement;
+
+  // Check saved preference or system preference
+  function getPreferredTheme(){
+    const saved=localStorage.getItem('theme');
+    if(saved) return saved;
+    return window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+  }
+
+  function setTheme(theme){
+    html.setAttribute('data-theme',theme);
+    localStorage.setItem('theme',theme);
+    themeToggle.setAttribute('aria-label',theme==='dark'?'Switch to light mode':'Switch to dark mode');
+  }
+
+  // Apply saved theme immediately
+  setTheme(getPreferredTheme());
+
+  themeToggle.addEventListener('click',()=>{
+    const current=html.getAttribute('data-theme')||'dark';
+    setTheme(current==='dark'?'light':'dark');
+  });
+
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme:light)').addEventListener('change',(e)=>{
+    if(!localStorage.getItem('theme')){
+      setTheme(e.matches?'light':'dark');
+    }
+  });
 </script>
 
 </body>
